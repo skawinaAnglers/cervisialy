@@ -24,6 +24,7 @@ import HomeScreen from './src/screens/HomeScreen'
 import CameraScreen from './src/screens/CameraScreen'
 import TrackerScreen from './src/screens/TrackerScreen'
 import FlankiScreen from './src/screens/FlankiScreen'
+import AddPostScreen from "./src/screens/AddPostScreen"
 // Utilities
 import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
@@ -94,6 +95,10 @@ const App = () => {
 						<Stack.Screen
 							name='CameraScreen'
 							component={CameraScreen}
+						/>
+						<Stack.Screen
+							name='AddPostScreen'
+							component={AddPostScreen}
 						/>
 					</Stack.Navigator>
 					<BottomNavigation />
