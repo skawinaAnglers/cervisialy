@@ -21,10 +21,12 @@ import BottomNavigation from './src/components/BottomNavigation'
 // Screens
 import LoginScreen from './src/screens/LoginScreen'
 import HomeScreen from './src/screens/HomeScreen'
+import CameraScreen from './src/screens/CameraScreen'
+import TrackerScreen from './src/screens/TrackerScreen'
+import FlankiScreen from './src/screens/FlankiScreen'
 // Utilities
 import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
-
 
 const Stack = createStackNavigator()
 
@@ -79,6 +81,19 @@ const App = () => {
 							options={{
 								header: () => null
 							}}
+						/>
+						<Stack.Screen
+							name='FlankiScreen'
+							component={FlankiScreen}
+						/>
+						<Stack.Screen
+							name='TrackerScreen'
+							component={TrackerScreen}
+
+						/>
+						<Stack.Screen
+							name='CameraScreen'
+							component={CameraScreen}
 						/>
 					</Stack.Navigator>
 					<BottomNavigation />
