@@ -64,6 +64,11 @@
 			"marginLeft": 48
 		}
 	},
+	"mt-12": {
+		"style": {
+			"marginTop": 48
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -287,6 +292,17 @@
 			"lineHeight": 40
 		}
 	},
+	"text-[12px]": {
+		"style": {
+			"fontSize": 12
+		}
+	},
+	"text-sm": {
+		"style": {
+			"fontSize": 14,
+			"lineHeight": 20
+		}
+	},
 	"font-semibold": {
 		"style": {
 			"fontWeight": "600"
@@ -300,6 +316,11 @@
 	"font-bold": {
 		"style": {
 			"fontWeight": "700"
+		}
+	},
+	"font-[12px]": {
+		"style": {
+			"fontWeight": "12px"
 		}
 	},
 	"uppercase": {
