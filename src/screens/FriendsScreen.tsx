@@ -23,7 +23,7 @@ const FriendsScreen: React.FC = () => {
 					icon={ SearchIcon }
 				/>
 				<SingleFriend
-					userId={ 1 }
+					userId={ 10 }
 					// image="https://i.ytimg.com/vi/PqB0ZQUwbKI/hqdefault.jpg"
 					userName="User name"
 					favPiwo="Żuberek"
