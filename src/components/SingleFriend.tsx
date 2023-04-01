@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import BeerIcon from "../assets/BeerIcon";
 
 interface SingleFriendPayload {
-	userId: number
+	userId: number | string
 	userName: string
 	image?: string
 	favPiwo: string
@@ -24,7 +24,7 @@ const SingleFriend: React.FC<SingleFriendPayload> = ({
 	const navigation = useNavigation();
 
 	const handleUserNavigate = () => {
-		// navigation.navigate("UserProfileScreen", { userId })
+		navigation.navigate("ProfileScreen" as never, { userId } as never);
 	}
 
 	return (
