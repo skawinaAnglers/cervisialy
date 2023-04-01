@@ -21,6 +21,7 @@ import TailwindProvider from './src/components/tailwind/TailwindProvider'
 import utilities from './tailwind.json'
 import LoginScreen from './src/screens/LoginScreen'
 import store from './src/store'
+import HomeScreen from './src/screens/HomeScreen'
 
 
 const Stack = createStackNavigator()
@@ -74,6 +75,13 @@ const App = () => {
 							<Stack.Screen
 								name='Login'
 								component={LoginScreen}
+								options={{
+									header: () => null
+								}}
+							/>
+							<Stack.Screen
+								name='HomeScreen'
+								component={HomeScreen}
 								options={{
 									header: () => null
 								}}
