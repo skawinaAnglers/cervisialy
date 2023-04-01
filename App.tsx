@@ -34,11 +34,11 @@ const App = () => {
     dark: true,
     colors: {
       ...DefaultTheme.colors,
-      primary: tailwind('text-sky-500').color as string,
-      card: tailwind('text-gray-800').color as string,
-      text: tailwind('text-slate-50').color as string,
-      border: tailwind('text-slate-800').color as string,
-      background: tailwind('text-gray-900').color as string
+      primary: tailwind('text-emerald-900').color as string,
+      card: tailwind('text-neutral-800').color as string,
+      text: tailwind('text-neutral-300').color as string,
+      border: tailwind('text-neutral-800').color as string,
+      background: '#171717' // neutral-900
     }
   }
 
