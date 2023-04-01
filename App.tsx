@@ -107,6 +107,7 @@ const App = () => {
 						<Stack.Screen
 							name='ProfileScreen'
 							component={ UserProfileScreen }
+							initialParams={ { userId: firebaseUser?.uid } }
 						/>
 					</Stack.Navigator>
 					<Toast 
