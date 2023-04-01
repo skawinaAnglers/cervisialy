@@ -16,7 +16,7 @@ const AddPostScreen: React.FC = () => {
 	return (
 		<View style={ [ tailwind("px-6 pt-10 bg-neutral-900") ] }>
 			<SafeAreaView>
-				<PreviewDisplay mainImage={""} secondaryImage={""} style={ [ tailwind("mb-4") ] }/>
+				<PreviewDisplay mainImage="" secondaryImage="" style={ [ tailwind("mb-4") ] }/>
 				<IconBanner
 					name="Recognized drink props"
 					color="neutral-400"
