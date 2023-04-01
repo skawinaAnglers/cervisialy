@@ -191,6 +191,12 @@
 			"paddingBottom": 8
 		}
 	},
+	"py-4": {
+		"style": {
+			"paddingTop": 16,
+			"paddingBottom": 16
+		}
+	},
 	"py-6": {
 		"style": {
 			"paddingTop": 24,
@@ -237,6 +243,12 @@
 		"style": {
 			"fontSize": 36,
 			"lineHeight": 40
+		}
+	},
+	"text-base": {
+		"style": {
+			"fontSize": 16,
+			"lineHeight": 24
 		}
 	},
 	"text-lg": {

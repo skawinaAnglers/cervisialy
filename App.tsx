@@ -15,6 +15,7 @@ import utilities from "./tailwind.json";
 import store from "./src/store";
 import HomeScreen from "./src/screens/HomeScreen";
 import AddPostScreen from "./src/screens/AddPostScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 
 const Stack = createStackNavigator()
 
@@ -64,13 +65,13 @@ const App = () => {
 				<BottomSheetModalProvider>
 					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
 						<Stack.Navigator>
-							{/* <Stack.Screen */}
-							{/* 	name='Login' */}
-							{/* 	component={LoginScreen} */}
-							{/* 	options={{ */}
-							{/* 		header: () => null */}
-							{/* 	}} */}
-							{/* /> */}
+							<Stack.Screen
+								name='Login'
+								component={LoginScreen}
+								options={{
+									header: () => null
+								}}
+							/>
 							<Stack.Screen
 								name='AddPostScreen'
 								component={AddPostScreen}
