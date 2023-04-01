@@ -7,6 +7,7 @@ import MainButton from "../components/MainButton";
 import Separator from "../components/Separator";
 import IconBanner from "../components/IconBanner";
 import BeerIcon from "../assets/BeerIcon";
+import PreviewDisplay from "../components/PreviewDisplay";
 
 const AddPostScreen: React.FC = () => {
 
@@ -15,6 +16,7 @@ const AddPostScreen: React.FC = () => {
 	return (
 		<View style={ [ tailwind("px-6 pt-10 bg-neutral-900") ] }>
 			<SafeAreaView>
+				<PreviewDisplay mainImage={""} secondaryImage={""} style={ [ tailwind("mb-4") ] }/>
 				<IconBanner
 					name="Recognized drink props"
 					color="neutral-400"
