@@ -92,7 +92,8 @@ module.exports = {
     'react/no-access-state-in-setstate': 'off',
     'react/no-unstable-nested-components': 'off',
     'react/no-array-index-key': 'off',
-    'unicorn/numeric-separators-style': 'off'
+    'unicorn/numeric-separators-style': 'off',
+		'import/prefer-default-export': 'off'
   },
   overrides: [
     {
