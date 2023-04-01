@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from 'react-native'
 import { useTailwind } from 'tailwind-rn'
 
-const WelcomeScreen: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const tailwind = useTailwind()
 
   return (
@@ -15,4 +15,4 @@ const WelcomeScreen: React.FC = () => {
   )
 }
 
-export default WelcomeScreen
+export default LoginScreen

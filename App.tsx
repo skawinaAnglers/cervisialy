@@ -19,7 +19,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import TailwindProvider from './src/components/tailwind/TailwindProvider'
 // Utilities
 import utilities from './tailwind.json'
-import WelcomeScreen from './src/screens/WelcomeScreen'
+import LoginScreen from './src/screens/LoginScreen'
 import store from './src/store'
 
 
@@ -27,7 +27,7 @@ const Stack = createStackNavigator()
 
 SplashScreen.preventAutoHideAsync()
 
-export default function App() {
+const App = () => {
   const tailwind = useTailwind()
   const NavigationTheme = {
     ...DefaultTheme,
@@ -72,8 +72,8 @@ export default function App() {
 					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
 						<Stack.Navigator>
 							<Stack.Screen
-								name='Welcome'
-								component={WelcomeScreen}
+								name='Login'
+								component={LoginScreen}
 								options={{
 									header: () => null
 								}}
@@ -85,3 +85,5 @@ export default function App() {
     </Provider>
   )
 }
+
+export default App
