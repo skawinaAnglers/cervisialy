@@ -4,22 +4,24 @@ import {
 	StyleProp,
 	ViewStyle,
 	NativeSyntheticEvent,
-	TextInputKeyPressEventData
+	TextInputKeyPressEventData,
+	TouchableOpacity
 } from 'react-native'
 import React, { useMemo } from 'react'
 import { SvgProps } from 'react-native-svg'
 import { useTailwind } from 'tailwind-rn'
+import VisibleIcon from '../assets/VisibleIcon'
+import NotVisibleIcon from '../assets/NotVisibleIcon'
 
 
-type TextInputPayload = {
+interface TextInputPayload {
 	placeholder?: string,
 	value: string,
 	onChangeText: (text: string) => void,
-	required?: boolean,
 	charLimit?: number,
 	icon?: React.FC<SvgProps>,
 	style?: StyleProp<ViewStyle>,
-	isInvalid?: boolean,
+	switchVisibility?: boolean,
 	onKeyPress?: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void,
 	onPressOut?: () => void,
 	onSubmit?: () => void
@@ -28,16 +30,26 @@ const RegularTextInput: React.FC<TextInputPayload> = ({
 	placeholder,
 	value,
 	onChangeText,
-	required = false,
+	switchVisibility = false,
 	charLimit,
 	icon: IconComponent,
 	style,
-	isInvalid = false,
 	onKeyPress,
 	onPressOut,
 	onSubmit
 }) => {
 	const tailwind = useTailwind()
+	const [visible, setVisible] = React.useState<boolean>(false)
+
+	const VisiblityIcon: JSX.Element = useMemo(() => {
+		const props = {
+			width: 22,
+			height: 22,
+			fill: tailwind('text-neutral-400').color as string
+		}
+
+		return visible ? <VisibleIcon {...props} /> : <NotVisibleIcon {...props} />
+	}, [visible])
 
 	const onChange = (text: string) => {
 		if (charLimit && text.length > charLimit) {
@@ -46,13 +58,6 @@ const RegularTextInput: React.FC<TextInputPayload> = ({
 		}
 		onChangeText(text)
 	}
-
-	const isValid = useMemo(() => {
-		if (!required) return true
-		if (isInvalid) return false
-		if (value.length > 0) return true
-		return false
-	}, [isInvalid, value, required])
 	
 	return (
 		<View
@@ -63,19 +68,33 @@ const RegularTextInput: React.FC<TextInputPayload> = ({
 		>
 			
 			<View style={[tailwind('relative flex items-center justify-center w-full')]}>
+				
 				{
 					IconComponent && (
 						<View
 							style={[
-								tailwind('absolute right-0 mr-4 z-20 flex items-center justify-center'),
+								tailwind('absolute left-4 z-20 flex items-center justify-center'),
 							]}
 						>
 							<IconComponent
-								width={22}
-								height={22}
-								fill={tailwind(`text-${isValid ? 'slate' : 'red'}-500`).color as string}
+								width={24}
+								height={24}
+								fill={tailwind('text-neutral-400').color as string}
 							/>
 						</View>
+					)
+				}
+
+				{
+					switchVisibility && (
+						<TouchableOpacity
+							style={[
+								tailwind('absolute right-0 mr-4 z-20 flex items-center justify-center'),
+							]}
+							onPress={() => setVisible(!visible)}
+						>
+							{VisiblityIcon}
+						</TouchableOpacity>
 					)
 				}
 				
@@ -84,12 +103,14 @@ const RegularTextInput: React.FC<TextInputPayload> = ({
 					value={value}
 					onChangeText={onChange}
 					style={[
-						tailwind(`mt-1 border border-slate-800 font-light w-full rounded-md p-4 pr-12 text-slate-300 bg-slate-800`),
-						!isValid && tailwind('border-red-500'),
+						tailwind(`mt-1 border border-neutral-700 font-light w-full rounded-md p-4 text-neutral-100 bg-neutral-700`),
+						IconComponent && tailwind('pl-12'),
+						switchVisibility && tailwind('pr-12')
 					]}
+					secureTextEntry={switchVisibility && visible}
 					autoCapitalize='none'
 					returnKeyType='done'
-					placeholderTextColor={tailwind('text-slate-500').color as string}
+					placeholderTextColor={tailwind('text-neutral-100/70').color as string}
 					onSubmitEditing={onSubmit}
 					onKeyPress={onKeyPress}
 					onPressOut={onPressOut}
