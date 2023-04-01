@@ -18,6 +18,7 @@ const MenuButton: React.FC = () => {
 			index: 0,
 			routes: [{ name: screenName as never }]
 		})
+		setIsVisible(false)
 	}, [])
 
 	return (

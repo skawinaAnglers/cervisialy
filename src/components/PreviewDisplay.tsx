@@ -5,7 +5,7 @@ import { View, Image, StyleProp, ViewStyle } from "react-native";
 interface PreviewDisplayPayload {
 	mainImage: string;
 	secondaryImage: string;
-	style?: StyleProp<ViewStyle>
+	style?: StyleProp<ViewStyle>,
 }
 
 const PreviewDisplay: React.FC<PreviewDisplayPayload> = ({
@@ -15,7 +15,6 @@ const PreviewDisplay: React.FC<PreviewDisplayPayload> = ({
 }) => {
 
 	const tailwind = useTailwind();
-
 	return (
 		<View style={ [ tailwind("relative w-full border-4 border-emerald-900 rounded-md"), style, { aspectRatio: 1 } ] }>
 			<Image source={ { uri: mainImage } } style={ [ tailwind("w-full h-full") ] }/>

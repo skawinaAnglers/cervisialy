@@ -89,19 +89,30 @@ const App = () => {
 						<Stack.Screen
 							name='FlankiScreen'
 							component={FlankiScreen}
+							options={{
+								header: () => null
+							}}
 						/>
 						<Stack.Screen
 							name='TrackerScreen'
 							component={TrackerScreen}
-
+							options={{
+								header: () => null
+							}}
 						/>
 						<Stack.Screen
 							name='CameraScreen'
 							component={CameraScreen}
+							options={{
+								header: () => null
+							}}
 						/>
 						<Stack.Screen
 							name='AddPostScreen'
 							component={AddPostScreen}
+							options={{
+								header: () => null
+							}}
 						/>
 					</Stack.Navigator>
 					<Toast 

@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useTailwind } from 'tailwind-rn'
+import { useNavigation, useNavigationState } from '@react-navigation/native'
 import { RootState } from '../store'
 import NavButton from './NavButton'
 import HomeIcon from '../assets/HomeIcon'
@@ -13,6 +14,7 @@ import MenuButton from './MenuButton'
 const BottomNavigation: React.FC = () => {
   const { firebaseUser } = useSelector((state: RootState) => state.user)
 	const tailwind = useTailwind()
+	const currentRoute = useNavigationState((state) => state?.routes[(state?.routes.length || 1) - 1].name)
 
   return (
     <View
@@ -21,7 +23,8 @@ const BottomNavigation: React.FC = () => {
     >
       {firebaseUser?.uid && (
 				<>
-					<MenuButton />
+					{ currentRoute !== 'CameraScreen' && currentRoute !== 'AddPostScreen' && <MenuButton /> }
+					
 
 					<View
 						style={[
