@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { useTailwind } from 'tailwind-rn'
 import Quote from '../components/Quote'
 import RegularTextInput from '../components/RegularTextInput'
@@ -32,12 +32,18 @@ const LoginScreen: React.FC = () => {
 					onChangeText={setPassword}
 					icon={KeyIcon}
 				/>
+				
 				<View style={[tailwind('mt-6')]} />
 				<MainButton name="Sign in"/>
-				<Text style={ [ tailwind('font-light font-sm text-neutral-300 text-center mt-2') ] }>
+				<Text style={ [ tailwind('font-light text-sm text-neutral-300 text-center mt-2') ] }>
 					By signing in you accept our Terms & Condition
 					and Privacy Policy
 				</Text>
+
+				<Image 
+					source={require('../../assets/HomeScreenImage.png')}
+					style={[tailwind('mt-12')]}
+				/>
       </SafeAreaView>
     </View>
   )
