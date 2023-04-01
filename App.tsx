@@ -19,26 +19,27 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import TailwindProvider from './src/components/tailwind/TailwindProvider'
 // Utilities
 import utilities from './tailwind.json'
-import WelcomeScreen from './src/screens/WelcomeScreen'
+import LoginScreen from './src/screens/LoginScreen'
 import store from './src/store'
+import HomeScreen from './src/screens/HomeScreen'
 
 
 const Stack = createStackNavigator()
 
 SplashScreen.preventAutoHideAsync()
 
-export default function App() {
+const App = () => {
   const tailwind = useTailwind()
   const NavigationTheme = {
     ...DefaultTheme,
     dark: true,
     colors: {
       ...DefaultTheme.colors,
-      primary: tailwind('text-sky-500').color as string,
-      card: tailwind('text-gray-800').color as string,
-      text: tailwind('text-slate-50').color as string,
-      border: tailwind('text-slate-800').color as string,
-      background: tailwind('text-gray-900').color as string
+      primary: tailwind('text-emerald-900').color as string,
+      card: tailwind('text-neutral-800').color as string,
+      text: tailwind('text-neutral-300').color as string,
+      border: tailwind('text-neutral-800').color as string,
+      background: '#171717' // neutral-900
     }
   }
 
@@ -72,8 +73,15 @@ export default function App() {
 					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
 						<Stack.Navigator>
 							<Stack.Screen
-								name='Welcome'
-								component={WelcomeScreen}
+								name='Login'
+								component={LoginScreen}
+								options={{
+									header: () => null
+								}}
+							/>
+							<Stack.Screen
+								name='HomeScreen'
+								component={HomeScreen}
 								options={{
 									header: () => null
 								}}
@@ -85,3 +93,5 @@ export default function App() {
     </Provider>
   )
 }
+
+export default App
