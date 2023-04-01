@@ -60,6 +60,11 @@
 			"marginBottom": 16
 		}
 	},
+	"mb-8": {
+		"style": {
+			"marginBottom": 32
+		}
+	},
 	"ml-2": {
 		"style": {
 			"marginLeft": 8
@@ -115,6 +120,11 @@
 			"marginTop": 24
 		}
 	},
+	"mb-5": {
+		"style": {
+			"marginBottom": 20
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -128,6 +138,11 @@
 	"h-24": {
 		"style": {
 			"height": 96
+		}
+	},
+	"h-40": {
+		"style": {
+			"height": 160
 		}
 	},
 	"h-full": {
@@ -158,6 +173,11 @@
 	"w-24": {
 		"style": {
 			"width": 96
+		}
+	},
+	"w-40": {
+		"style": {
+			"width": 160
 		}
 	},
 	"w-full": {

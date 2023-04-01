@@ -31,6 +31,7 @@ import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
 import { useUserObserver } from './src/hooks/useUserObserver'
 import FriendsScreen from "./src/screens/FriendsScreen";
+import UserProfileScreen from "./src/screens/UserProfileScreen";
 
 const Stack = createStackNavigator()
 
@@ -103,6 +104,11 @@ const App = () => {
 						<Stack.Screen
 							name='AddPostScreen'
 							component={AddPostScreen}
+						/>
+						<Stack.Screen
+							name='ProfileScreen'
+							component={ UserProfileScreen }
+							initialParams={ { userId: firebaseUser?.uid } }
 						/>
 						<Stack.Screen
 							name='FriendsScreen'
