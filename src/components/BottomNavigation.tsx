@@ -11,7 +11,7 @@ import SettingsIcon from '../assets/SettingsIcon'
 import MenuButton from './MenuButton'
 
 const BottomNavigation: React.FC = () => {
-  const { uid } = useSelector((state: RootState) => state.user)
+  const { firebaseUser } = useSelector((state: RootState) => state.user)
 	const tailwind = useTailwind()
 
   return (
@@ -19,7 +19,7 @@ const BottomNavigation: React.FC = () => {
       style={[tailwind('flex items-center justify-center absolute top-0 w-full h-full')]}
       pointerEvents='box-none'
     >
-      {uid && (
+      {firebaseUser?.uid && (
 				<>
 					<MenuButton />
 

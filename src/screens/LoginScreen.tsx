@@ -1,31 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { View, Text, Image } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
+import { signInAnonymously } from "firebase/auth"
 import { useTailwind } from 'tailwind-rn'
+import Toast from 'react-native-toast-message'
+import { auth } from '../helpers/setupFirebaseApp'
 import Quote from '../components/Quote'
 import RegularTextInput from '../components/RegularTextInput'
 import UserIcon from '../assets/UserIcon'
 import KeyIcon from '../assets/KeyIcon'
 import MainButton from '../components/MainButton'
-import { setUid } from '../store/slices/user'
 
 const LoginScreen: React.FC = () => {
   const tailwind = useTailwind()
-	const { reset } = useNavigation()
-	const dispatch = useDispatch()
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [login, setLogin] = React.useState<string>('')
 	const [password, setPassword] = React.useState<string>('')
 
-	const handleSubmit = () => {
-		dispatch(setUid('test'))
-		reset({
-			index: 0,
-			routes: [{ name: 'HomeScreen' as never }]
-		} as never)
+	const handleSubmit = async () => {
+		setIsLoading(true)
+		try {
+			const firebaseCredential = await signInAnonymously(auth)
+			if (!firebaseCredential || !firebaseCredential.user)
+				throw new Error('Something went wrong. Please, try again later.')
+		} catch (error) {
+			Toast.show({
+				type: 'error',
+				text1: 'Error',
+				text2: error instanceof Error ? error.message : 'Unknown error'
+			})
+		}
+		setIsLoading(false)
 	}
-
   return (
     <View style={[tailwind('px-6 pt-10 bg-neutral-900')]}>
       <SafeAreaView>
@@ -48,6 +54,7 @@ const LoginScreen: React.FC = () => {
 				
 				<View style={[tailwind('mt-6')]} />
 				<MainButton
+					isLoading={isLoading}
 					name="Sign in"
 					onPress={handleSubmit}
 				/>
