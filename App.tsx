@@ -1,28 +1,20 @@
 // Libraries
-import 'react-native-gesture-handler'
-import React, { useCallback } from 'react'
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import {
-  useFonts,
-  Lato_100Thin,
-  Lato_300Light,
-  Lato_400Regular,
-  Lato_700Bold,
-  Lato_900Black
-} from '@expo-google-fonts/lato'
-import * as SplashScreen from 'expo-splash-screen'
-import { useTailwind } from 'tailwind-rn'
-import { Provider } from 'react-redux'
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import "react-native-gesture-handler";
+import React, { useCallback } from "react";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Lato_100Thin, Lato_300Light, Lato_400Regular, Lato_700Bold, Lato_900Black, useFonts } from "@expo-google-fonts/lato";
+import * as SplashScreen from "expo-splash-screen";
+import { useTailwind } from "tailwind-rn";
+import { Provider } from "react-redux";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 // Components
-import TailwindProvider from './src/components/tailwind/TailwindProvider'
+import TailwindProvider from "./src/components/tailwind/TailwindProvider";
 // Utilities
-import utilities from './tailwind.json'
-import LoginScreen from './src/screens/LoginScreen'
-import store from './src/store'
-import HomeScreen from './src/screens/HomeScreen'
-
+import utilities from "./tailwind.json";
+import store from "./src/store";
+import HomeScreen from "./src/screens/HomeScreen";
+import AddPostScreen from "./src/screens/AddPostScreen";
 
 const Stack = createStackNavigator()
 
@@ -72,9 +64,16 @@ const App = () => {
 				<BottomSheetModalProvider>
 					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
 						<Stack.Navigator>
+							{/* <Stack.Screen */}
+							{/* 	name='Login' */}
+							{/* 	component={LoginScreen} */}
+							{/* 	options={{ */}
+							{/* 		header: () => null */}
+							{/* 	}} */}
+							{/* /> */}
 							<Stack.Screen
-								name='Login'
-								component={LoginScreen}
+								name='AddPostScreen'
+								component={AddPostScreen}
 								options={{
 									header: () => null
 								}}
