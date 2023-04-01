@@ -43,6 +43,10 @@
   margin-bottom: 1rem
 }
 
+.mb-8 {
+  margin-bottom: 2rem
+}
+
 .ml-2 {
   margin-left: 0.5rem
 }
@@ -83,12 +87,20 @@
   margin-top: 1.5rem
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem
+}
+
 .flex {
   display: flex
 }
 
 .h-24 {
   height: 6rem
+}
+
+.h-40 {
+  height: 10rem
 }
 
 .h-full {
@@ -109,6 +121,10 @@
 
 .w-24 {
   width: 6rem
+}
+
+.w-40 {
+  width: 10rem
 }
 
 .w-full {
@@ -137,6 +153,10 @@
 
 .justify-between {
   justify-content: space-between
+}
+
+.rounded-full {
+  border-radius: 9999px
 }
 
 .rounded-lg {

@@ -30,6 +30,7 @@ import AddPostScreen from "./src/screens/AddPostScreen"
 import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
 import { useUserObserver } from './src/hooks/useUserObserver'
+import UserProfileScreen from "./src/screens/UserProfileScreen";
 
 const Stack = createStackNavigator()
 
@@ -102,6 +103,10 @@ const App = () => {
 						<Stack.Screen
 							name='AddPostScreen'
 							component={AddPostScreen}
+						/>
+						<Stack.Screen
+							name='ProfileScreen'
+							component={ UserProfileScreen }
 						/>
 					</Stack.Navigator>
 					<Toast 
