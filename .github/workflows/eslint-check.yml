@@ -1,0 +1,19 @@
+name: React Native QA
+on:
+  pull_request:
+    paths: ['src/**']
+    branches: [main]
+
+jobs:
+  typescript-check:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: yarn
+      - run: yarn
+      - name: 📕 ESLint Check
+        run: yarn lint
