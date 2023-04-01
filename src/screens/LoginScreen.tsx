@@ -2,20 +2,24 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { View, Text, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 import { useTailwind } from 'tailwind-rn'
 import Quote from '../components/Quote'
 import RegularTextInput from '../components/RegularTextInput'
 import UserIcon from '../assets/UserIcon'
 import KeyIcon from '../assets/KeyIcon'
 import MainButton from '../components/MainButton'
+import { setUid } from '../store/slices/user'
 
 const LoginScreen: React.FC = () => {
   const tailwind = useTailwind()
 	const { reset } = useNavigation()
+	const dispatch = useDispatch()
 	const [login, setLogin] = React.useState<string>('')
 	const [password, setPassword] = React.useState<string>('')
 
 	const handleSubmit = () => {
+		dispatch(setUid('test'))
 		reset({
 			index: 0,
 			routes: [{ name: 'HomeScreen' as never }]

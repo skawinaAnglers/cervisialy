@@ -1,21 +1,33 @@
 // Libraries
-import "react-native-gesture-handler";
-import React, { useCallback } from "react";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Lato_100Thin, Lato_300Light, Lato_400Regular, Lato_700Bold, Lato_900Black, useFonts } from "@expo-google-fonts/lato";
-import * as SplashScreen from "expo-splash-screen";
-import { useTailwind } from "tailwind-rn";
-import { Provider } from "react-redux";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import 'react-native-gesture-handler'
+import React, { useCallback } from 'react'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import {
+  useFonts,
+  Lato_100Thin,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_900Black
+} from '@expo-google-fonts/lato'
+import * as SplashScreen from 'expo-splash-screen'
+import { useTailwind } from 'tailwind-rn'
+import { Provider, useSelector } from 'react-redux'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 // Components
-import TailwindProvider from "./src/components/tailwind/TailwindProvider";
+import TailwindProvider from './src/components/tailwind/TailwindProvider'
+import BottomNavigation from './src/components/BottomNavigation'
+// Screens
+import LoginScreen from './src/screens/LoginScreen'
+import HomeScreen from './src/screens/HomeScreen'
+import CameraScreen from './src/screens/CameraScreen'
+import TrackerScreen from './src/screens/TrackerScreen'
+import FlankiScreen from './src/screens/FlankiScreen'
+import AddPostScreen from "./src/screens/AddPostScreen"
 // Utilities
-import utilities from "./tailwind.json";
-import store from "./src/store";
-import HomeScreen from "./src/screens/HomeScreen";
-import AddPostScreen from "./src/screens/AddPostScreen";
-import LoginScreen from "./src/screens/LoginScreen";
+import utilities from './tailwind.json'
+import store, { RootState } from './src/store'
 
 const Stack = createStackNavigator()
 
@@ -23,6 +35,7 @@ SplashScreen.preventAutoHideAsync()
 
 const App = () => {
   const tailwind = useTailwind()
+	const { uid } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,
     dark: true,
@@ -58,40 +71,50 @@ const App = () => {
   if (!fontsLoaded) {
     return null
   }
-
   return (
-    <Provider store={store}>
-      <TailwindProvider utilities={utilities}>
-				<BottomSheetModalProvider>
-					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
-						<Stack.Navigator>
-							<Stack.Screen
-								name='Login'
-								component={LoginScreen}
-								options={{
-									header: () => null
-								}}
-							/>
-							<Stack.Screen
-								name='AddPostScreen'
-								component={AddPostScreen}
-								options={{
-									header: () => null
-								}}
-							/>
-							<Stack.Screen
-								name='HomeScreen'
-								component={HomeScreen}
-								options={{
-									header: () => null
-								}}
-							/>
-						</Stack.Navigator>
-					</NavigationContainer>
-				</BottomSheetModalProvider>
-      </TailwindProvider>
-    </Provider>
+		<TailwindProvider utilities={utilities}>
+			<BottomSheetModalProvider>
+				<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
+					<Stack.Navigator>
+						<Stack.Screen
+							name='HomeScreen'
+							component={uid ? HomeScreen : LoginScreen}
+							options={{
+								header: () => null
+							}}
+						/>
+						<Stack.Screen
+							name='FlankiScreen'
+							component={FlankiScreen}
+						/>
+						<Stack.Screen
+							name='TrackerScreen'
+							component={TrackerScreen}
+
+						/>
+						<Stack.Screen
+							name='CameraScreen'
+							component={CameraScreen}
+						/>
+						<Stack.Screen
+							name='AddPostScreen'
+							component={AddPostScreen}
+						/>
+					</Stack.Navigator>
+					<BottomNavigation />
+				</NavigationContainer>
+			</BottomSheetModalProvider>
+		</TailwindProvider>
   )
 }
 
-export default App
+// eslint-disable-next-line arrow-body-style
+const AppWrapper = () => {
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+)
+}
+
+export default AppWrapper
