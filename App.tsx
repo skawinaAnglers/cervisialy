@@ -13,16 +13,20 @@ import {
 } from '@expo-google-fonts/lato'
 import * as SplashScreen from 'expo-splash-screen'
 import { useTailwind } from 'tailwind-rn'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 // Components
 import TailwindProvider from './src/components/tailwind/TailwindProvider'
+import BottomNavigation from './src/components/BottomNavigation'
+// Screens
+import LoginScreen from './src/screens/LoginScreen'
+import HomeScreen from './src/screens/HomeScreen'
+import CameraScreen from './src/screens/CameraScreen'
+import TrackerScreen from './src/screens/TrackerScreen'
+import FlankiScreen from './src/screens/FlankiScreen'
 // Utilities
 import utilities from './tailwind.json'
-import LoginScreen from './src/screens/LoginScreen'
-import store from './src/store'
-import HomeScreen from './src/screens/HomeScreen'
-
+import store, { RootState } from './src/store'
 
 const Stack = createStackNavigator()
 
@@ -30,6 +34,7 @@ SplashScreen.preventAutoHideAsync()
 
 const App = () => {
   const tailwind = useTailwind()
+	const { uid } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,
     dark: true,
@@ -65,33 +70,46 @@ const App = () => {
   if (!fontsLoaded) {
     return null
   }
-
   return (
-    <Provider store={store}>
-      <TailwindProvider utilities={utilities}>
-				<BottomSheetModalProvider>
-					<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
-						<Stack.Navigator>
-							<Stack.Screen
-								name='Login'
-								component={LoginScreen}
-								options={{
-									header: () => null
-								}}
-							/>
-							<Stack.Screen
-								name='HomeScreen'
-								component={HomeScreen}
-								options={{
-									header: () => null
-								}}
-							/>
-						</Stack.Navigator>
-					</NavigationContainer>
-				</BottomSheetModalProvider>
-      </TailwindProvider>
-    </Provider>
+		<TailwindProvider utilities={utilities}>
+			<BottomSheetModalProvider>
+				<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
+					<Stack.Navigator>
+						<Stack.Screen
+							name='HomeScreen'
+							component={uid ? HomeScreen : LoginScreen}
+							options={{
+								header: () => null
+							}}
+						/>
+						<Stack.Screen
+							name='FlankiScreen'
+							component={FlankiScreen}
+						/>
+						<Stack.Screen
+							name='TrackerScreen'
+							component={TrackerScreen}
+
+						/>
+						<Stack.Screen
+							name='CameraScreen'
+							component={CameraScreen}
+						/>
+					</Stack.Navigator>
+					<BottomNavigation />
+				</NavigationContainer>
+			</BottomSheetModalProvider>
+		</TailwindProvider>
   )
 }
 
-export default App
+// eslint-disable-next-line arrow-body-style
+const AppWrapper = () => {
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+)
+}
+
+export default AppWrapper
