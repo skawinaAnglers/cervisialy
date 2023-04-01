@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import UserProfileHeader from "../components/UserProfileHeader";
 import { StackNavigationProp } from "@react-navigation/stack";
+import StatsCard from "../components/StatsCard";
 
 interface AddPostParams {
 	userId: string
@@ -18,10 +19,29 @@ const UserProfileScreen: React.FC<PropsWithChildren<any> & { route: StackNavigat
 	return (
 		<View style={ [ tailwind("px-6 bg-neutral-900") ] }>
 			<SafeAreaView>
-				<UserProfileHeader
-					userName={ `MagnushChase-${ userId }` }
-					image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyjOTPaJ4NL4G0ZlkwAKxhen7H7YSxUrfBXA&usqp=CAU"
-				/>
+				<View>
+					<UserProfileHeader
+						userName={ `MagnushChase-${ userId }` }
+						image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyjOTPaJ4NL4G0ZlkwAKxhen7H7YSxUrfBXA&usqp=CAU"
+					/>
+					<View style={ [ tailwind("flex flex-row justify-between") ] }>
+						<StatsCard
+							count={ 123 }
+							title="Wins"
+							style={ [ tailwind("bg-green-500") ] }
+						/>
+						<StatsCard
+							count={ 123 }
+							title="Loses"
+							style={ [ tailwind("bg-red-500") ] }
+						/>
+						<StatsCard
+							count="31%"
+							title="Wins"
+							style={ [ tailwind("bg-red-500") ] }
+						/>
+					</View>
+				</View>
 			</SafeAreaView>
 		</View>
 	);
