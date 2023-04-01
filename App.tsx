@@ -15,6 +15,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useTailwind } from 'tailwind-rn'
 import { Provider, useSelector } from 'react-redux'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import Toast from 'react-native-toast-message'
 // Components
 import TailwindProvider from './src/components/tailwind/TailwindProvider'
 import BottomNavigation from './src/components/BottomNavigation'
@@ -28,6 +29,7 @@ import AddPostScreen from "./src/screens/AddPostScreen"
 // Utilities
 import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
+import { useUserObserver } from './src/hooks/useUserObserver'
 
 const Stack = createStackNavigator()
 
@@ -35,7 +37,8 @@ SplashScreen.preventAutoHideAsync()
 
 const App = () => {
   const tailwind = useTailwind()
-	const { uid } = useSelector((state: RootState) => state.user)
+	useUserObserver()
+	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,
     dark: true,
@@ -78,7 +81,7 @@ const App = () => {
 					<Stack.Navigator>
 						<Stack.Screen
 							name='HomeScreen'
-							component={uid ? HomeScreen : LoginScreen}
+							component={firebaseUser?.uid ? HomeScreen : LoginScreen}
 							options={{
 								header: () => null
 							}}
@@ -101,6 +104,9 @@ const App = () => {
 							component={AddPostScreen}
 						/>
 					</Stack.Navigator>
+					<Toast 
+						topOffset={50}
+					/>
 					<BottomNavigation />
 				</NavigationContainer>
 			</BottomSheetModalProvider>
