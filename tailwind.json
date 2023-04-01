@@ -49,9 +49,29 @@
 			"right": 16
 		}
 	},
+	"top-4": {
+		"style": {
+			"top": 16
+		}
+	},
+	"left-0": {
+		"style": {
+			"left": 0
+		}
+	},
 	"z-20": {
 		"style": {
 			"zIndex": 20
+		}
+	},
+	"z-[-1]": {
+		"style": {
+			"zIndex": -1
+		}
+	},
+	"z-[1]": {
+		"style": {
+			"zIndex": 1
 		}
 	},
 	"my-4": {
@@ -115,9 +135,49 @@
 			"marginTop": 24
 		}
 	},
+	"mb-12": {
+		"style": {
+			"marginBottom": 48
+		}
+	},
+	"mb-px": {
+		"style": {
+			"marginBottom": 1
+		}
+	},
+	"ml-1": {
+		"style": {
+			"marginLeft": 4
+		}
+	},
+	"ml-3": {
+		"style": {
+			"marginLeft": 12
+		}
+	},
+	"block": {
+		"style": {
+			"display": "block"
+		}
+	},
+	"inline": {
+		"style": {
+			"display": "inline"
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
+		}
+	},
+	"contents": {
+		"style": {
+			"display": "contents"
+		}
+	},
+	"hidden": {
+		"style": {
+			"display": "none"
 		}
 	},
 	"h-24": {
@@ -133,6 +193,11 @@
 	"h-px": {
 		"style": {
 			"height": 1
+		}
+	},
+	"h-16": {
+		"style": {
+			"height": 64
 		}
 	},
 	"w-1/2": {
@@ -160,6 +225,23 @@
 			"width": 128
 		}
 	},
+	"w-16": {
+		"style": {
+			"width": 64
+		}
+	},
+	"w-48": {
+		"style": {
+			"width": 192
+		}
+	},
+	"flex-1": {
+		"style": {
+			"flexGrow": 1,
+			"flexShrink": 1,
+			"flexBasis": "0%"
+		}
+	},
 	"flex-grow": {
 		"style": {
 			"flexGrow": 1
@@ -175,9 +257,24 @@
 			"flexDirection": "column"
 		}
 	},
+	"items-start": {
+		"style": {
+			"alignItems": "flex-start"
+		}
+	},
 	"items-center": {
 		"style": {
 			"alignItems": "center"
+		}
+	},
+	"justify-start": {
+		"style": {
+			"justifyContent": "flex-start"
+		}
+	},
+	"justify-end": {
+		"style": {
+			"justifyContent": "flex-end"
 		}
 	},
 	"justify-center": {
@@ -204,6 +301,14 @@
 			"borderTopRightRadius": 6,
 			"borderBottomRightRadius": 6,
 			"borderBottomLeftRadius": 6
+		}
+	},
+	"rounded-full": {
+		"style": {
+			"borderTopLeftRadius": 9999,
+			"borderTopRightRadius": 9999,
+			"borderBottomRightRadius": 9999,
+			"borderBottomLeftRadius": 9999
 		}
 	},
 	"rounded-b-md": {
@@ -304,6 +409,23 @@
 	"bg-neutral-900/5": {
 		"style": {
 			"backgroundColor": "rgb(23 23 23 / 0.05)"
+		}
+	},
+	"bg-slate-800": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(30 41 59 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-transparent": {
+		"style": {
+			"backgroundColor": "transparent"
+		}
+	},
+	"bg-white": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(255 255 255 / var(--tw-bg-opacity))"
 		}
 	},
 	"p-4": {
@@ -416,6 +538,31 @@
 			"paddingTop": 8
 		}
 	},
+	"pt-8": {
+		"style": {
+			"paddingTop": 32
+		}
+	},
+	"pt-6": {
+		"style": {
+			"paddingTop": 24
+		}
+	},
+	"pb-2": {
+		"style": {
+			"paddingBottom": 8
+		}
+	},
+	"pb-8": {
+		"style": {
+			"paddingBottom": 32
+		}
+	},
+	"pb-6": {
+		"style": {
+			"paddingBottom": 24
+		}
+	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"
@@ -468,6 +615,12 @@
 			"lineHeight": 28
 		}
 	},
+	"text-5xl": {
+		"style": {
+			"fontSize": 48,
+			"lineHeight": 1
+		}
+	},
 	"font-bold": {
 		"style": {
 			"fontWeight": "700"
@@ -481,6 +634,16 @@
 	"font-semibold": {
 		"style": {
 			"fontWeight": "600"
+		}
+	},
+	"uppercase": {
+		"style": {
+			"textTransform": "uppercase"
+		}
+	},
+	"italic": {
+		"style": {
+			"fontStyle": "italic"
 		}
 	},
 	"text-emerald-500": {
@@ -564,6 +727,50 @@
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(202 138 4 / var(--tw-text-opacity))"
+		}
+	},
+	"text-sky-500": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(14 165 233 / var(--tw-text-opacity))"
+		}
+	},
+	"text-emerald-50": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(236 253 245 / var(--tw-text-opacity))"
+		}
+	},
+	"text-emerald-200": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(167 243 208 / var(--tw-text-opacity))"
+		}
+	},
+	"text-emerald-800": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(6 95 70 / var(--tw-text-opacity))"
+		}
+	},
+	"text-emerald-700/50": {
+		"style": {
+			"color": "rgb(4 120 87 / 0.5)"
+		}
+	},
+	"text-emerald-700/70": {
+		"style": {
+			"color": "rgb(4 120 87 / 0.7)"
+		}
+	},
+	"text-black/50": {
+		"style": {
+			"color": "rgb(0 0 0 / 0.5)"
+		}
+	},
+	"underline": {
+		"style": {
+			"textDecorationLine": "underline"
 		}
 	},
 	"opacity-50": {

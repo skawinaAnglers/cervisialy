@@ -1,4 +1,5 @@
 export default interface User {
 	createDate: number,
-	name: string
+	name: string,
+	avatar: string
 }
