@@ -1,3 +1,4 @@
 export default interface User {
-	createDate: number
+	createDate: number,
+	name: string
 }

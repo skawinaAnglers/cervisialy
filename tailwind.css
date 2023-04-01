@@ -10,20 +10,12 @@
   bottom: 0px
 }
 
-.bottom-4 {
-  bottom: 1rem
-}
-
 .left-4 {
   left: 1rem
 }
 
 .right-0 {
   right: 0px
-}
-
-.right-4 {
-  right: 1rem
 }
 
 .right-5 {
@@ -36,6 +28,14 @@
 
 .top-5 {
   top: 1.25rem
+}
+
+.bottom-4 {
+  bottom: 1rem
+}
+
+.right-4 {
+  right: 1rem
 }
 
 .z-20 {
@@ -119,12 +119,12 @@
   width: 6rem
 }
 
-.w-32 {
-  width: 8rem
-}
-
 .w-full {
   width: 100%
+}
+
+.w-32 {
+  width: 8rem
 }
 
 .flex-grow {
@@ -229,12 +229,12 @@
   background-color: rgb(23 23 23 / 0.05)
 }
 
-.p-1 {
-  padding: 0.25rem
-}
-
 .p-4 {
   padding: 1rem
+}
+
+.p-1 {
+  padding: 0.25rem
 }
 
 .px-2 {
