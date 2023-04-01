@@ -24,6 +24,12 @@
 			"zIndex": 20
 		}
 	},
+	"my-4": {
+		"style": {
+			"marginTop": 16,
+			"marginBottom": 16
+		}
+	},
 	"ml-2": {
 		"style": {
 			"marginLeft": 8
@@ -69,9 +75,19 @@
 			"marginTop": 24
 		}
 	},
+	"mb-10": {
+		"style": {
+			"marginBottom": 40
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
+		}
+	},
+	"hidden": {
+		"style": {
+			"display": "none"
 		}
 	},
 	"h-px": {
@@ -179,6 +195,12 @@
 			"paddingLeft": 16
 		}
 	},
+	"px-2": {
+		"style": {
+			"paddingLeft": 8,
+			"paddingRight": 8
+		}
+	},
 	"px-6": {
 		"style": {
 			"paddingLeft": 24,
@@ -189,6 +211,12 @@
 		"style": {
 			"paddingTop": 8,
 			"paddingBottom": 8
+		}
+	},
+	"py-3": {
+		"style": {
+			"paddingTop": 12,
+			"paddingBottom": 12
 		}
 	},
 	"py-4": {
