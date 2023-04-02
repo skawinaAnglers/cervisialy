@@ -26,7 +26,7 @@ PropsWithChildren<any> & {
 }
 > = ({route}) => {
 	const tailwind = useTailwind()
-	const { firebaseUser } = useSelector((state: RootState) => state.user)
+	const { firebaseUser, user } = useSelector((state: RootState) => state.user)
 	const { uriFront, uriBack } = route.params as AddPostParams
 	const [selectedDrinkId, setSelectedDrinkId] = useState<string>('')
 	const { goBack, reset } = useNavigation()
@@ -40,10 +40,11 @@ PropsWithChildren<any> & {
 			const mainImage = await uploadImageAsync(uriBack)
 			await addDoc(docRef, {
 				userId: firebaseUser.uid,
+				userName: user && user.name,
 				drinkId: selectedDrinkId,
 				mainImage,
 				secondaryImage,
-				createdAt: new Date()
+				createdAt: Date.now()
 			})
 			reset({
 				index: 0,
