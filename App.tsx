@@ -27,6 +27,7 @@ import FriendsScreen from "./src/screens/FriendsScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import { usePostObserver } from "./src/hooks/usePostObserver";
 import MapScreen from "./src/screens/MapScreen";
+import { useSpotObserver } from "./src/hooks/useSpotObserver";
 
 const Stack = createStackNavigator()
 
@@ -36,6 +37,7 @@ const App = () => {
   const tailwind = useTailwind()
 	useUserObserver()
 	usePostObserver()
+	useSpotObserver()
 	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,

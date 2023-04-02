@@ -1,8 +1,10 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTailwind } from "tailwind-rn";
+import { useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MapScreenModal from "../components/modals/MapScreenModal";
+import { RootState } from "../store";
 
 interface Location {
 	id: number
@@ -17,52 +19,13 @@ export interface ModalConfig {
 
 const MapScreen: React.FC = () => {
 	const tailwind = useTailwind();
-
+	const { spots } = useSelector((state: RootState) => state.user)
 
 	const squares = [ ...Array(12 * 21).keys()]
 
 	const [ modal, setModal ] = useState<ModalConfig>({ isOpen: false, spotId: null });
 
-	//const { firebaseUser } = useSelector((state: RootState) => state.user)
-	//
-	// const db = getFirestore();
-	//
-	// const [ isCurrentlyClicked, toggleCurrentylyClicked ] = useState(false);
-	//
-	// const sieemaEniu = async (currentSpotId: number) => {
-	// 	if (!firebaseUser) {
-	// 		toggleCurrentylyClicked(false);
-	// 		return
-	// 	}
-	// 	try {
-	// 		const docRef = doc(db, `localization/${ firebaseUser.uid }`)
-	// 		const data = await getDoc(docRef)
-	// 		if (!data.exists()) {
-	// 			toggleCurrentylyClicked(false);
-	// 			return;
-	// 		}
-	// 		const { spotId } = data.data as unknown as { spotId: number }
-	// 		return spotId === currentSpotId
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 		toggleCurrentylyClicked(false)
-	// 	}
-	// }
-	//
-	// useEffect(() => {
-	// 	sieemaEniu();
-	// }, [ modal.spotId, firebaseUser ]);
-	//
-	// const isCurrentlyClicked: boolean = useMemo(async () => {
-	// }, [modal.spotId, firebaseUser])
-	//
-	//
-	// const handleHereClick = async () => {
-	// 	console.log(firebaseUser);
-	// 	if (!firebaseUser) return
-	// 	const docRef = doc(db, `localization/${ firebaseUser.uid }`)
-	// 	await setDoc(docRef, { spot: modal.spotId })
-	// }
+	const gameSpots = useMemo(() => spots.filter((spot) => spot.gameUsers.length > 0), [spots])
 
 	return (
 		<>
@@ -79,12 +42,17 @@ const MapScreen: React.FC = () => {
 								data={ squares }
 								horizontal={ false }
 								contentContainerStyle={ [ tailwind("flex justify-between") ] }
+								scrollEnabled={false}
 								renderItem={
 									item =>
 										<TouchableOpacity
 											onPress={ () => setModal(prevState => ({ isOpen: !prevState.isOpen, spotId: item.item })) }
 											style={
-												[ tailwind("border border-black flex w-1/12"), { aspectRatio: 1, } ]
+												[ tailwind("border border-neutral-900/20 flex w-1/12"),
+												{ aspectRatio: 1 },
+												item.item % 2 === 0 ? tailwind("bg-neutral-900/10") : tailwind('bg-neutral-900/5'),
+												gameSpots.findIndex(element => element.id === item.item) !== -1 && tailwind("bg-red-500/10 border-red-500/30")
+											]
 											}
 										>
 											<Text style={ [ tailwind("text-transparent") ] }>
@@ -92,7 +60,7 @@ const MapScreen: React.FC = () => {
 											</Text>
 										</TouchableOpacity>
 								}
-								keyExtractor={ item => item }
+								keyExtractor={ item => item.toString() }
 								numColumns={ 12 }
 							/>
 						</SafeAreaView>

@@ -2,17 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FirebaseUser } from '../../types/FirebaseUser.interface'
 import User from '../../../functions/src/shared/User.interface'
 import Post from '../../types/Post.interface'
+import Spot from '../../types/Spot.interface'
 
 interface UserState {
   firebaseUser?: FirebaseUser,
 	user?: User,
-	posts: Post[]
+	posts: Post[],
+	spots: Spot[]
 }
 
 const initialState: UserState = {
   user: undefined,
 	firebaseUser: undefined,
-	posts: []
+	posts: [],
+	spots: []
 }
 
 export const userSlice = createSlice({
@@ -27,8 +30,11 @@ export const userSlice = createSlice({
     },
 		setPosts: (state, action: PayloadAction<Post[]>) => {
 			state.posts = action.payload
+		},
+		setSpots: (state, action: PayloadAction<Spot[]>) => {
+			state.spots = action.payload
 		}
   }
 })
 
-export const { setUser, setFirebaseUser, setPosts } = userSlice.actions
+export const { setUser, setFirebaseUser, setPosts, setSpots } = userSlice.actions

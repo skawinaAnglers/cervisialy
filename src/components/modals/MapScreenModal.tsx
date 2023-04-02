@@ -1,10 +1,14 @@
-import BaseModal from "./BaseModal";
+import React, { useState, useEffect, useCallback } from "react";
 import { ScrollView, Text } from "react-native";
+import { useTailwind } from "tailwind-rn";
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import BaseModal from "./BaseModal";
 import MainButton from "../MainButton";
 import MapModalUser from "../MapModalUser";
-import React from "react";
-import { useTailwind } from "tailwind-rn";
 import { ModalConfig } from "../../screens/MapScreen";
+import { RootState } from "../../store";
+import Spot from "../../types/Spot.interface";
 
 interface MapScreenModalPayload {
 	modalConfig: ModalConfig
@@ -15,43 +19,175 @@ const MapScreenModal: React.FC<MapScreenModalPayload> = ({
 	modalConfig,
 	toggleModalOpen,
 }) => {
+	const { firebaseUser, spots } = useSelector((state: RootState) => state.user)
+	const tailwind = useTailwind()
+	const db = getFirestore()
+	const [spotData, setSpotData] = useState<Spot | null>(null)
 
-	const tailwind = useTailwind();
+	const handleSubmitLocation = useCallback(async () => {
+		if (!firebaseUser) return
+		if (!modalConfig.spotId) return
+		try {
+			const userSpot = spots?.find((spot) => spot.localizedUsers.includes(firebaseUser.uid))
+			if (userSpot && userSpot.id !== modalConfig.spotId) {
+				const docRef = doc(db, `spots/${userSpot.id}`)
+				await setDoc(docRef, {
+					...userSpot,
+					localizedUsers: userSpot.localizedUsers.filter((uid) => uid !== firebaseUser.uid)
+				})
+				const newDocRef = doc(db, `spots/${modalConfig.spotId}`)
+				await setDoc(newDocRef, {
+					...userSpot,
+					localizedUsers: [...userSpot.localizedUsers, firebaseUser.uid]
+				})
+				return
+			}
 
-	const handleSubmitLocation = () => {
+			if (userSpot) {
+				const docRef = doc(db, `spots/${userSpot.id}`)
+				await setDoc(docRef, {
+					...userSpot,
+					localizedUsers: userSpot.localizedUsers.filter((uid) => uid !== firebaseUser.uid)
+				})
+				return
+			}
 
+			if (spotData)	{
+				const docRef = doc(db, `spots/${modalConfig.spotId}`)
+				await setDoc(docRef, {
+					...spotData,
+					localizedUsers: [...spotData.localizedUsers, firebaseUser.uid]
+			})
+				return
+			}
+
+			const docRef = doc(db, `spots/${modalConfig.spotId}`)
+			await setDoc(docRef, {
+				gameUsers: [],
+				localizedUsers: [firebaseUser.uid]
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}, [spots, spotData, modalConfig])
+
+	const handleGameReady = useCallback(async () => {
+		if (!firebaseUser) return
+		if (!modalConfig.spotId) return
+		try {
+			const userSpot = spots?.find((spot) => spot.gameUsers.includes(firebaseUser.uid))
+			if (userSpot && userSpot.id !== modalConfig.spotId) {
+				const docRef = doc(db, `spots/${userSpot.id}`)
+				await setDoc(docRef, {
+					...userSpot,
+					gameUsers: userSpot.gameUsers.filter((uid) => uid !== firebaseUser.uid)
+				})
+				const newDocRef = doc(db, `spots/${modalConfig.spotId}`)
+				await setDoc(newDocRef, {
+					...userSpot,
+					gameUsers: [...userSpot.gameUsers, firebaseUser.uid]
+				})
+				return
+			}
+
+			if (userSpot) {
+				const docRef = doc(db, `spots/${userSpot.id}`)
+				await setDoc(docRef, {
+					...userSpot,
+					gameUsers: userSpot.gameUsers.filter((uid) => uid !== firebaseUser.uid)
+				})
+				return
+			}
+
+			if (spotData)	{
+				const docRef = doc(db, `spots/${modalConfig.spotId}`)
+				await setDoc(docRef, {
+					...spotData,
+					gameUsers: [...spotData.gameUsers, firebaseUser.uid]
+			})
+				return
+			}
+
+			const docRef = doc(db, `spots/${modalConfig.spotId}`)
+			await setDoc(docRef, {
+				localizedUsers: [],
+				gameUsers: [firebaseUser.uid]
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}, [spots, spotData, modalConfig])
+
+	const fetchModalData = () => {
+		if (!modalConfig.spotId) return
+		const newSpotData = spots?.find((spot) => spot.id === modalConfig.spotId)
+		if (!newSpotData) return
+		setSpotData(newSpotData)
 	}
 
-	const handleStartFlanka = () => {
-
+	const closeModal = () => {
+		setSpotData(null)
+		toggleModalOpen()
 	}
+
+	useEffect(() => {
+		fetchModalData()
+	}, [spots, modalConfig.spotId])
 
 	return (
 		<BaseModal
 			isVisible={ modalConfig.isOpen }
-			onDismiss={ toggleModalOpen }
+			onDismiss={ closeModal }
 		>
 			<Text style={ [ tailwind("text-2xl text-white mb-3") ] }>
 				{ `Spot ${ modalConfig.spotId ?? "" }` }
 			</Text>
 			<MainButton
-				name="I'm here!"
+				name={spotData && spotData.localizedUsers.includes(firebaseUser?.uid ?? "") ? "I'm not here!" : "I'm here!"}
 				onPress={ handleSubmitLocation }
 				style={ [ tailwind("bg-emerald-500 mb-3") ] }
 				textStyle={ [ tailwind("text-white") ] }
 			/>
 			<MainButton
-				name="Start game"
-				onPress={ handleStartFlanka }
+				name={spotData && spotData.gameUsers.includes(firebaseUser?.uid ?? "") ? "Oops, retreat!" : "I'm ready to game!"}
+				onPress={ handleGameReady }
 				style={ [ tailwind("bg-neutral-400 mb-3") ] }
 				textStyle={ [ tailwind("text-white") ] }
 			/>
-			<Text style={ [ tailwind("text-2xl text-white mb-3") ] }>
-				{ `Who's there?` }
-			</Text>
-			<ScrollView horizontal style={ [ tailwind("pb-4") ] }>
-				<MapModalUser image="data:image/jpeg;base64,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"/>
-			</ScrollView>
+			{
+				spotData && spotData.localizedUsers.length > 0 && (
+					<>
+					<Text style={ [ tailwind("text-2xl text-white mb-3") ] }>
+						{ `Who's there?` }
+					</Text>
+					<ScrollView horizontal style={ [ tailwind("pb-4") ] }>
+						{
+							spotData?.localizedUsers.map((user) => (
+								<MapModalUser image={`https://api.dicebear.com/6.x/pixel-art/png?seed=${user}`} />
+							))
+						}
+					</ScrollView>
+					</>
+				)
+			}
+
+{
+				spotData && spotData.gameUsers.length > 0 && (
+					<>
+					<Text style={ [ tailwind("text-2xl text-white mb-3") ] }>
+						These people are ready to play:
+					</Text>
+					<ScrollView horizontal style={ [ tailwind("pb-4") ] }>
+						{
+							spotData?.gameUsers.map((user) => (
+								<MapModalUser image={`https://api.dicebear.com/6.x/pixel-art/png?seed=${user}`} />
+							))
+						}
+					</ScrollView>
+					</>
+				)
+			}
+			
 		</BaseModal>
 	)
 };
