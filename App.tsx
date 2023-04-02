@@ -5,12 +5,12 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import {
   useFonts,
-  Lato_100Thin,
-  Lato_300Light,
-  Lato_400Regular,
-  Lato_700Bold,
-  Lato_900Black
-} from '@expo-google-fonts/lato'
+	Quicksand_300Light,
+	Quicksand_400Regular,
+	Quicksand_500Medium,
+	Quicksand_600SemiBold,
+	Quicksand_700Bold
+} from '@expo-google-fonts/quicksand'
 import * as SplashScreen from 'expo-splash-screen'
 import { useTailwind } from 'tailwind-rn'
 import { Provider, useSelector } from 'react-redux'
@@ -57,11 +57,11 @@ const App = () => {
   }
 
   const [fontsLoaded] = useFonts({
-    Lato_100Thin,
-    Lato_300Light,
-    Lato_400Regular,
-    Lato_700Bold,
-    Lato_900Black
+    Quicksand_300Light,
+    Quicksand_400Regular,
+    Quicksand_500Medium,
+    Quicksand_600SemiBold,
+    Quicksand_700Bold
   })
 
   const onLayoutRootView = useCallback(async () => {
@@ -82,7 +82,7 @@ const App = () => {
 		<TailwindProvider utilities={utilities}>
 			<BottomSheetModalProvider>
 				<NavigationContainer onReady={onLayoutRootView} theme={NavigationTheme}>
-					<Stack.Navigator>
+					<Stack.Navigator screenOptions={{animationEnabled: false}}>
 						<Stack.Screen
 							name='HomeScreen'
 							component={firebaseUser?.uid ? HomeScreen : LoginScreen}
@@ -122,10 +122,16 @@ const App = () => {
 							name='ProfileScreen'
 							component={ UserProfileScreen }
 							initialParams={ { userId: firebaseUser?.uid } }
+							options={{
+								header: () => null
+							}}
 						/>
 						<Stack.Screen
 							name='FriendsScreen'
 							component={ FriendsScreen }
+							options={{
+								header: () => null
+							}}
 						/>
 					</Stack.Navigator>
 					<Toast 

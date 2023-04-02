@@ -177,6 +177,14 @@
   margin-top: 1.75rem
 }
 
+.ml-4 {
+  margin-left: 1rem
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem
+}
+
 .block {
   display: block
 }
@@ -552,6 +560,14 @@
 
 .pr-8 {
   padding-right: 2rem
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem
+}
+
+.pt-4 {
+  padding-top: 1rem
 }
 
 .text-center {
