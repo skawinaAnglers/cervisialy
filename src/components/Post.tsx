@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTailwind } from "tailwind-rn";
-import dayjs from 'dayjs'
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { getTimeDifference } from "../helpers/getTimeDifference";
 
