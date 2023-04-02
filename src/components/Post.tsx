@@ -62,7 +62,7 @@ const Post: React.FC<PostPayload> = ({
 			</View>
 			<View>
 				<View>
-
+					test
 				</View>
 				{/* <View> */}
 				{/* 	<Text>{ userName }</Text> */}

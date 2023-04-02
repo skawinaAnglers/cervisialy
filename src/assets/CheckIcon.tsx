@@ -1,5 +1,6 @@
 import * as React from "react"
-import Svg, { SvgProps, Path } from "react-native-svg"
+import Svg, { SvgProps, Path } from "react-native-svg";
+
 const CheckIcon = (props: SvgProps) => (
 	<Svg
 		clipRule='evenodd'

@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn";
-import UserIcon from "../assets/UserIcon";
 import { useNavigation } from "@react-navigation/native";
+import UserIcon from "../assets/UserIcon";
 import BeerIcon from "../assets/BeerIcon";
 
 interface SingleFriendPayload {
