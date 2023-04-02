@@ -10,6 +10,7 @@ import FriendsIcon from '../assets/FriendsIcon'
 import UserIcon from '../assets/UserIcon'
 import SettingsIcon from '../assets/SettingsIcon'
 import MenuButton from './MenuButton'
+import MapIcon from "../assets/MapIcon";
 
 const BottomNavigation: React.FC = () => {
   const { firebaseUser } = useSelector((state: RootState) => state.user)
@@ -23,7 +24,7 @@ const BottomNavigation: React.FC = () => {
     >
       {firebaseUser?.uid && (
 				<>
-					{ currentRoute !== 'CameraScreen' && currentRoute !== 'AddPostScreen' && <MenuButton /> }
+					{ currentRoute !== 'CameraScreen' && currentRoute !== 'AddPostScreen' &&  currentRoute !== 'MapScreen' && <MenuButton /> }
 					
 
 					<View
@@ -47,9 +48,9 @@ const BottomNavigation: React.FC = () => {
 								icon={UserIcon}
 							/>
 							<NavButton 
-								screenName="SettingsScreen"
-								text="Settings"
-								icon={SettingsIcon}
+								screenName="MapScreen"
+								text="Map"
+								icon={MapIcon}
 							/>
 					</View>
 				</>
