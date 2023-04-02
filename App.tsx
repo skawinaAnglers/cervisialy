@@ -32,6 +32,7 @@ import store, { RootState } from './src/store'
 import { useUserObserver } from './src/hooks/useUserObserver'
 import FriendsScreen from "./src/screens/FriendsScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
+import { usePostObserver } from './src/hooks/usePostObserver'
 
 const Stack = createStackNavigator()
 
@@ -40,6 +41,7 @@ SplashScreen.preventAutoHideAsync()
 const App = () => {
   const tailwind = useTailwind()
 	useUserObserver()
+	usePostObserver()
 	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,

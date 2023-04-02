@@ -28,7 +28,7 @@ const Shape = () => {
 				delay: 50,
 			}}
 			style={[
-				tailwind('absolute w-full h-full bg-white z-2')
+				tailwind('absolute w-full h-full bg-white')
 			]}
 		/>
 	)
