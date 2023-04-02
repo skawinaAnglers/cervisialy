@@ -59,6 +59,34 @@ PropsWithChildren<any> & {
 		}
 	}
 
+	const handleAddGame = async (gameStatus: 'won' | 'lost') => {
+		if (!firebaseUser) return
+		try {
+			const db = getFirestore()
+			const docRef = collection(db, 'posts')
+			const secondaryImage = await uploadImageAsync(uriFront)
+			const mainImage = await uploadImageAsync(uriBack)
+			await addDoc(docRef, {
+				userId: firebaseUser.uid,
+				userName: user && user.name,
+				gameStatus,
+				mainImage,
+				secondaryImage,
+				createdAt: Date.now()
+			})
+			reset({
+				index: 0,
+				routes: [{ name: 'HomeScreen' as never }]
+			})
+		} catch (error) {
+			Toast.show({
+				type: 'error',
+				text1: 'Error',
+				text2: error instanceof Error ? error.message : 'Unknown error'
+			})
+		}
+	}
+
 	return (
 		<View style={ [ tailwind("px-6 pt-10 bg-neutral-900") ] }>
 			<SafeAreaView>
@@ -83,8 +111,12 @@ PropsWithChildren<any> & {
 					onPress={handleSubmit}
 				/>
 				<Separator/>
-				<SmallerMainButton name="Go back" onPress={goBack} />
-
+				<View style={[
+					tailwind('flex flex-row justify-between')
+				]}>
+					<SmallerMainButton name="Add won game" onPress={() => handleAddGame('won')} />
+					<SmallerMainButton name="Add lost game" onPress={() => handleAddGame('lost')} />
+				</View>
 			</SafeAreaView>
 		</View>
 	);

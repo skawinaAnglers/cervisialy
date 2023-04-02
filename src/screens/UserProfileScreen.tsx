@@ -21,8 +21,9 @@ const UserProfileScreen= () => {
 			loses: [],
 			winRate: 0
 		}
-		const gamesWon = posts.filter(post => post.winners && post.winners.includes(firebaseUser.uid))
-		const gamesLost = posts.filter(post => post.losers && post.losers.includes(firebaseUser.uid))
+		const userPosts = posts.filter(post => post.userId === firebaseUser.uid)
+		const gamesWon = userPosts.filter(post => post.gameStatus === 'won')
+		const gamesLost = posts.filter(post => post.gameStatus === 'lost')
 		const currentWinRate = Math.floor(gamesWon.length / ((gamesWon.length + gamesLost.length) || 1) * 100)
 
 		return {
@@ -36,7 +37,7 @@ const UserProfileScreen= () => {
 		const allGames = [...wins, ...loses]
 		return allGames.sort((a, b) => b.createdAt - a.createdAt).slice(0, 3)
 	}, [wins, loses])
-	
+
 	return (
 		<View style={ [ tailwind("px-6 bg-neutral-900 pt-6") ] }>
 			<SafeAreaView>
@@ -72,8 +73,8 @@ const UserProfileScreen= () => {
 							renderItem={({ item }) => (
 								<GameCard
 									style={ [ tailwind("mt-3") ] }
-									icon={ item.winners && item.winners.includes(firebaseUser?.uid || '') ? CheckIcon : CrossIcon }
-									type={ item.winners && item.winners.includes(firebaseUser?.uid || '') ? 'win' : 'loss' }
+									icon={ item.gameStatus === 'won' ? CheckIcon : CrossIcon }
+									type={ item.gameStatus === 'won' ? 'win' : 'loss' }
 									createdAt={item.createdAt}
 								/>
 							)}
