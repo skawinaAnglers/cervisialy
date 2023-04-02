@@ -11,8 +11,7 @@ const UserProfileHeader: React.FC<UserProfilePayload> = ({
 	image,
 	userName,
 }) => {
-
-	const tailwind = useTailwind();
+	const tailwind = useTailwind()
 
 	return (
 		<View style={ [ tailwind("flex items-center") ] }>

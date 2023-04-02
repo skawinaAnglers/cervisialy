@@ -1,64 +1,82 @@
-import React, { PropsWithChildren } from "react";
+import React, { useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useTailwind } from "tailwind-rn";
+import { useSelector } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
 import UserProfileHeader from "../components/UserProfileHeader";
 import StatsCard from "../components/StatsCard";
 import GameCard from "../components/GameCard";
 import CrossIcon from "../assets/CrossIcon";
 import CheckIcon from "../assets/CheckIcon";
+import { RootState } from "../store";
 
-interface AddPostParams {
-	userId: string
-}
+const UserProfileScreen= () => {
+	const { firebaseUser, user, posts } = useSelector((state: RootState) => state.user)
+	const tailwind = useTailwind()
+	
+	const { wins, loses, winRate } = useMemo(() => {
+		if (!user || !firebaseUser) return {
+			wins: [],
+			loses: [],
+			winRate: 0
+		}
+		const gamesWon = posts.filter(post => post.winners && post.winners.includes(firebaseUser.uid))
+		const gamesLost = posts.filter(post => post.losers && post.losers.includes(firebaseUser.uid))
+		const currentWinRate = Math.floor(gamesWon.length / ((gamesWon.length + gamesLost.length) || 1) * 100)
 
-const UserProfileScreen: React.FC<PropsWithChildren<any> & { route: StackNavigationProp<any> }> = ({ route }) => {
+		return {
+			wins: gamesWon,
+			loses: gamesLost,
+			winRate: currentWinRate
+		}
+	}, [posts, user])
 
-	const tailwind = useTailwind();
-
-	const { userId } = route.params as AddPostParams;
-
+	const lastGames = useMemo(() => {
+		const allGames = [...wins, ...loses]
+		return allGames.sort((a, b) => b.createdAt - a.createdAt).slice(0, 3)
+	}, [wins, loses])
+	
 	return (
-		<View style={ [ tailwind("px-6 bg-neutral-900") ] }>
+		<View style={ [ tailwind("px-6 bg-neutral-900 pt-6") ] }>
 			<SafeAreaView>
 				<View>
 					<UserProfileHeader
-						userName={ `MagnushChase-${ userId }` }
-						image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyjOTPaJ4NL4G0ZlkwAKxhen7H7YSxUrfBXA&usqp=CAU"
+						userName={ user?.name || 'Unknown' }
+						image={user?.avatar || ''}
 					/>
 					<View style={ [ tailwind("flex flex-row justify-between mt-7") ] }>
 						<StatsCard
-							count={ 123 }
+							count={wins.length}
 							title="Wins"
 							style={ [ tailwind("bg-neutral-300") ] }
 						/>
 						<StatsCard
-							count={ 123 }
+							count={loses.length}
 							title="Loses"
 							style={ [ tailwind("bg-neutral-300") ] }
 						/>
 						<StatsCard
-							count="31%"
-							title="Wins"
+							count={winRate}
+							title="Win rate"
 							style={ [ tailwind("bg-neutral-300") ] }
 						/>
 					</View>
 					<View style={ [ tailwind("mt-5") ] }>
-						<Text style={ [ tailwind("text-2xl text-neutral-300") ] }>
+						<Text style={ [ tailwind("font-semibold text-2xl text-neutral-300") ] }>
 							Last games
 						</Text>
-						<GameCard
-							style={ [ tailwind("bg-red-500 mt-3") ] }
-							icon={ CrossIcon }
-							title="LOSE"
-							date="19:23 29.03.2023"
-						/>
-						<GameCard
-							style={ [ tailwind("bg-green-500 mt-3") ] }
-							icon={ CheckIcon }
-							title="WIN"
-							date="19:23 29.03.2023"
+						<FlatList
+							data={lastGames}
+							keyExtractor={(item, index) => item.id || `unknown-${index}`}
+							renderItem={({ item }) => (
+								<GameCard
+									style={ [ tailwind("mt-3") ] }
+									icon={ item.winners && item.winners.includes(firebaseUser?.uid || '') ? CheckIcon : CrossIcon }
+									type={ item.winners && item.winners.includes(firebaseUser?.uid || '') ? 'win' : 'loss' }
+									createdAt={item.createdAt}
+								/>
+							)}
 						/>
 					</View>
 				</View>

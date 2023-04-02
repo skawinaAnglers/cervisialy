@@ -17,7 +17,7 @@ const StatsCard: React.FC<StatsCardPayload> = ({
 	const tailwind = useTailwind();
 
 	return (
-		<View style={ [ style, tailwind("py-4 pr-8 pl-2 rounded-md") ] }>
+		<View style={ [ style, tailwind("py-4 pl-4 pr-12 flex rounded-md") ] }>
 			<Text style={ [ tailwind("font-bold text-2xl") ] }>
 				{ count }
 			</Text>

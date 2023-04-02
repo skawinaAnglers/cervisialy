@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTailwind } from "tailwind-rn";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RegularTextInput from "../components/RegularTextInput";
 import SearchIcon from "../assets/SearchIcon";
@@ -13,10 +13,12 @@ const FriendsScreen: React.FC = () => {
 	const [ search, setSearch ] = useState("");
 
 	return (
-		<View style={[tailwind('bg-neutral-900')]}>
+		<View style={[tailwind('bg-neutral-900 px-6 pt-4')]}>
 			<SafeAreaView>
+				<Text style={ [ tailwind('font-bold text-4xl mb-6 text-neutral-300 mt-2') ] }>
+					Friends
+				</Text>
 				<RegularTextInput
-					style={ [ tailwind("px-6") ] }
 					placeholder="Search"
 					value={ search }
 					onChangeText={ searchText => setSearch(searchText) }
@@ -24,9 +26,8 @@ const FriendsScreen: React.FC = () => {
 				/>
 				<SingleFriend
 					userId={ 10 }
-					// image="https://i.ytimg.com/vi/PqB0ZQUwbKI/hqdefault.jpg"
-					userName="User name"
-					favPiwo="Żuberek"
+					avatar="https://i.ytimg.com/vi/PqB0ZQUwbKI/hqdefault.jpg"
+					name="KapitolHaze2115"
 				/>
 			</SafeAreaView>
 		</View>

@@ -15,7 +15,7 @@ export const createUserProfile = functions.auth
 		const userData = {
 			createDate: Date.now(),
 			name: generateRandomName(),
-			avatar: `https://api.dicebear.com/6.x/pixel-art/svg?seed=${user.uid}`
+			avatar: `https://api.dicebear.com/6.x/pixel-art/png?seed=${user.uid}`
 		} as User
 		const userDoc = db.collection('users').doc(user.uid)
 		await userDoc.set(userData)
