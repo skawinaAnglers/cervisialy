@@ -3,19 +3,22 @@ import { FirebaseUser } from '../../types/FirebaseUser.interface'
 import User from '../../../functions/src/shared/User.interface'
 import Post from '../../types/Post.interface'
 import Spot from '../../types/Spot.interface'
+import Beer from '../../types/Beer.interface'
 
 interface UserState {
   firebaseUser?: FirebaseUser,
 	user?: User,
 	posts: Post[],
-	spots: Spot[]
+	spots: Spot[],
+	beers: Beer[]
 }
 
 const initialState: UserState = {
   user: undefined,
 	firebaseUser: undefined,
 	posts: [],
-	spots: []
+	spots: [],
+	beers: []
 }
 
 export const userSlice = createSlice({
@@ -33,8 +36,11 @@ export const userSlice = createSlice({
 		},
 		setSpots: (state, action: PayloadAction<Spot[]>) => {
 			state.spots = action.payload
+		},
+		setBeers: (state, action: PayloadAction<Beer[]>) => {
+			state.beers = action.payload
 		}
   }
 })
 
-export const { setUser, setFirebaseUser, setPosts, setSpots } = userSlice.actions
+export const { setUser, setFirebaseUser, setPosts, setSpots, setBeers } = userSlice.actions

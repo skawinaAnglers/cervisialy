@@ -28,6 +28,7 @@ import UserProfileScreen from "./src/screens/UserProfileScreen";
 import { usePostObserver } from "./src/hooks/usePostObserver";
 import MapScreen from "./src/screens/MapScreen";
 import { useSpotObserver } from "./src/hooks/useSpotObserver";
+import { useBeerObserver } from "./src/hooks/useBeerObserver";
 
 const Stack = createStackNavigator()
 
@@ -38,6 +39,7 @@ const App = () => {
 	useUserObserver()
 	usePostObserver()
 	useSpotObserver()
+	useBeerObserver()
 	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,
