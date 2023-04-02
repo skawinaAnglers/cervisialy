@@ -6,7 +6,7 @@ import UserIcon from "../assets/UserIcon";
 import BeerIcon from "../assets/BeerIcon";
 
 interface SingleFriendPayload {
-	id: number | string
+	id: string
 	name: string
 	avatar: string
 }

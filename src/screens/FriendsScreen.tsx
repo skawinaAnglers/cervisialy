@@ -1,10 +1,38 @@
 import React, { useState } from "react";
 import { useTailwind } from "tailwind-rn";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RegularTextInput from "../components/RegularTextInput";
 import SearchIcon from "../assets/SearchIcon";
 import SingleFriend from "../components/SingleFriend";
+
+const FRIEND_LIST = [
+	{
+		id: 'asgaoikbsgbasgojuaosg',
+		name: 'EnglandIPA1200',
+		avatar: 'https://api.dicebear.com/6.x/pixel-art/png?seed=asgaoikbsgbasgojuaosg'
+	},
+	{
+		id: 'sagsagasgasgasg',
+		name: 'StayHydrated1215',
+		avatar: 'https://api.dicebear.com/6.x/pixel-art/png?seed=sagsagasgasgasg'
+	},
+	{
+		id: 'asgaoikbsgbhsdhsdhasgojuaosg',
+		name: 'HelloWorld2115',
+		avatar: 'https://api.dicebear.com/6.x/pixel-art/png?seed=asgaoikbsgbhsdhsdhasgojuaosg'
+	},
+	{
+		id: 'jfhdjdfjdfjjfdj',
+		name: 'LubiePlacki3030',
+		avatar: 'https://api.dicebear.com/6.x/pixel-art/png?seed=jfhdjdfjdfjjfdj'
+	},
+	{
+		id: 'asgaoikbsvccnvcnnvngbasgojuaosg',
+		name: 'HelloDarkness1222',
+		avatar: 'https://api.dicebear.com/6.x/pixel-art/png?seed=asgaoikbsvccnvcnnvngbasgojuaosg'
+	}
+] as { id: string, name: string, avatar: string }[]
 
 const FriendsScreen: React.FC = () => {
 
@@ -18,16 +46,12 @@ const FriendsScreen: React.FC = () => {
 				<Text style={ [ tailwind('font-bold text-4xl mb-6 text-neutral-300 mt-2') ] }>
 					Friends
 				</Text>
-				<RegularTextInput
-					placeholder="Search"
-					value={ search }
-					onChangeText={ searchText => setSearch(searchText) }
-					icon={ SearchIcon }
-				/>
-				<SingleFriend
-					userId={ 10 }
-					avatar="https://i.ytimg.com/vi/PqB0ZQUwbKI/hqdefault.jpg"
-					name="KapitolHaze2115"
+				<FlatList 
+					data={ FRIEND_LIST }
+					renderItem={ ({ item }) => (
+						<SingleFriend {...item} />
+					)}
+					keyExtractor={ item => item.id }
 				/>
 			</SafeAreaView>
 		</View>
