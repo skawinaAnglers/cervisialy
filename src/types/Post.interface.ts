@@ -7,5 +7,6 @@ export default interface Post {
 	losers?: string[],
 	mainImage: string,
 	secondaryImage: string,
-	createdAt: number
+	createdAt: number,
+	id?: string
 }

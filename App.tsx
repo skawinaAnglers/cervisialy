@@ -30,6 +30,7 @@ import AddPostScreen from "./src/screens/AddPostScreen"
 import utilities from './tailwind.json'
 import store, { RootState } from './src/store'
 import { useUserObserver } from './src/hooks/useUserObserver'
+import { usePostObserver } from './src/hooks/usePostObserver'
 
 const Stack = createStackNavigator()
 
@@ -38,6 +39,7 @@ SplashScreen.preventAutoHideAsync()
 const App = () => {
   const tailwind = useTailwind()
 	useUserObserver()
+	usePostObserver()
 	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,

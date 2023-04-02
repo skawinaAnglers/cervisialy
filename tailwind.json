@@ -104,6 +104,12 @@
 			"marginRight": 24
 		}
 	},
+	"my-2": {
+		"style": {
+			"marginTop": 8,
+			"marginBottom": 8
+		}
+	},
 	"mb-4": {
 		"style": {
 			"marginBottom": 16
