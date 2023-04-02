@@ -1,38 +1,34 @@
 // Libraries
-import 'react-native-gesture-handler'
-import React, { useCallback } from 'react'
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import {
-  useFonts,
-	Quicksand_300Light,
-	Quicksand_400Regular,
-	Quicksand_500Medium,
-	Quicksand_600SemiBold,
-	Quicksand_700Bold
-} from '@expo-google-fonts/quicksand'
-import * as SplashScreen from 'expo-splash-screen'
-import { useTailwind } from 'tailwind-rn'
-import { Provider, useSelector } from 'react-redux'
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import Toast from 'react-native-toast-message'
+import "react-native-gesture-handler";
+import React, { useCallback } from "react";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Quicksand_300Light, Quicksand_400Regular, Quicksand_500Medium, Quicksand_600SemiBold, Quicksand_700Bold, useFonts } from "@expo-google-fonts/quicksand";
+import * as SplashScreen from "expo-splash-screen";
+import { useTailwind } from "tailwind-rn";
+import { Provider, useSelector } from "react-redux";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import Toast from "react-native-toast-message";
 // Components
-import TailwindProvider from './src/components/tailwind/TailwindProvider'
-import BottomNavigation from './src/components/BottomNavigation'
+import TailwindProvider from "./src/components/tailwind/TailwindProvider";
+import BottomNavigation from "./src/components/BottomNavigation";
 // Screens
-import LoginScreen from './src/screens/LoginScreen'
-import HomeScreen from './src/screens/HomeScreen'
-import CameraScreen from './src/screens/CameraScreen'
-import TrackerScreen from './src/screens/TrackerScreen'
-import FlankiScreen from './src/screens/FlankiScreen'
-import AddPostScreen from "./src/screens/AddPostScreen"
+import LoginScreen from "./src/screens/LoginScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import CameraScreen from "./src/screens/CameraScreen";
+import TrackerScreen from "./src/screens/TrackerScreen";
+import FlankiScreen from "./src/screens/FlankiScreen";
+import AddPostScreen from "./src/screens/AddPostScreen";
 // Utilities
-import utilities from './tailwind.json'
-import store, { RootState } from './src/store'
-import { useUserObserver } from './src/hooks/useUserObserver'
+import utilities from "./tailwind.json";
+import store, { RootState } from "./src/store";
+import { useUserObserver } from "./src/hooks/useUserObserver";
 import FriendsScreen from "./src/screens/FriendsScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
-import { usePostObserver } from './src/hooks/usePostObserver'
+import { usePostObserver } from "./src/hooks/usePostObserver";
+import MapScreen from "./src/screens/MapScreen";
+import { useSpotObserver } from "./src/hooks/useSpotObserver";
+import { useBeerObserver } from "./src/hooks/useBeerObserver";
 
 const Stack = createStackNavigator()
 
@@ -42,6 +38,8 @@ const App = () => {
   const tailwind = useTailwind()
 	useUserObserver()
 	usePostObserver()
+	useSpotObserver()
+	useBeerObserver()
 	const { firebaseUser } = useSelector((state: RootState) => state.user)
   const NavigationTheme = {
     ...DefaultTheme,
@@ -129,6 +127,13 @@ const App = () => {
 						<Stack.Screen
 							name='FriendsScreen'
 							component={ FriendsScreen }
+							options={{
+								header: () => null
+							}}
+						/>
+						<Stack.Screen
+							name='MapScreen'
+							component={MapScreen}
 							options={{
 								header: () => null
 							}}

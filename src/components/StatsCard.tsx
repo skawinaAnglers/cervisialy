@@ -19,7 +19,7 @@ const StatsCard: React.FC<StatsCardPayload> = ({
 	return (
 		<View style={ [ style, tailwind("py-4 pl-4 pr-12 flex rounded-md") ] }>
 			<Text style={ [ tailwind("font-bold text-2xl") ] }>
-				{ count }
+				{ count }{ title === 'Win rate' && '%' }
 			</Text>
 			<Text style={ [ tailwind("text-base") ] }>
 				{ title }

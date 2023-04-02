@@ -13,7 +13,7 @@ const SmallerMainButton: React.FC<SmallerMainButtonPayload> = ({ name, onPress, 
 	const tailwind = useTailwind();
 
 	return (
-		<TouchableOpacity onPress={ onPress } style={ [ tailwind("flex justify-center bg-emerald-900 py-4 rounded-lg"), style ] }>
+		<TouchableOpacity onPress={ onPress } style={ [ tailwind("flex px-8 justify-center bg-emerald-900 py-4 rounded-lg"), style ] }>
 			<Text style={ [ tailwind("font-semibold text-emerald-500 text-base text-center") ] }>
 				{ name }
 			</Text>

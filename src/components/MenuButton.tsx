@@ -25,7 +25,8 @@ const MenuButton: React.FC = () => {
 		<>
 			<Pressable
 				onPress={() => {
-					setIsVisible(true)
+					handlePress('CameraScreen')
+					// setIsVisible(true)
 				}}
 				style={({ pressed }) => [
 					tailwind('absolute bottom-0 flex flex-row justify-center items-center py-1 px-2 rounded-lg'),
@@ -39,11 +40,11 @@ const MenuButton: React.FC = () => {
 			>
 				<BeerIcon width={16} height={16} fill={tailwind('text-emerald-500').color as string} />
 				<Text style={[ tailwind('ml-2 font-semibold text-lg text-emerald-500 font-bold') ]}>
-					Menu
+					Add
 				</Text>
 			</Pressable>
 			
-			<BaseModal
+			{/* <BaseModal
 				isVisible={isVisible}
 				onDismiss={() => setIsVisible(false)}
 			>
@@ -76,7 +77,7 @@ const MenuButton: React.FC = () => {
 					 />
 
 		     </View>
-			</BaseModal>
+			</BaseModal> */}
 		</>
 
 	)
