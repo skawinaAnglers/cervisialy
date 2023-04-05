@@ -14,7 +14,6 @@ const MenuButton: React.FC = () => {
 	const [isVisible, setIsVisible] = useState<boolean>(false)
 
 
-
 	const handlePress = useCallback((screenName: string) => {
 		reset({
 			index: 0,
